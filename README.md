@@ -7,6 +7,7 @@ corresponde a um encontro e contém os arquivos `.py` praticados naquele dia.
 
 - Aula 1 → pasta [`aula 1/`](aula%201/)
 - Aula 2 → pasta [`aula 2/`](aula%202/)
+- Aula 3 → pasta [`aula 3/`](aula%203/)
 
 A cada nova aula, uma nova pasta `aula N` será adicionada com os arquivos daquele
 conteúdo. Os arquivos dentro de cada pasta são independentes entre si — cada `.py`
@@ -67,7 +68,56 @@ print(frutas)
 ```
 
 Arquivos da pasta: `temperatura.py`, `temperatura2.py`, `plantas.py`,
-`plantas_desafio.py`, `IR.py`, `salada.py`.
+`plantas_desafio.py`, `IR.py`, `salada.py`, `revisao1.py`, `revisao2.py`
+(esses dois últimos são enunciados de revisão ainda sem solução implementada).
+
+### Aula 3 — Funções, Listas e Dicionários
+
+Foco em organizar o código em funções reutilizáveis e em representar dados
+reais com listas e dicionários.
+
+- `def` — cria uma função, um bloco de código reutilizável que recebe
+  parâmetros e pode devolver um valor com `return`.
+- Dicionários (`{chave: valor}`) — associam uma chave a um valor, por exemplo
+  um ano à seleção campeã daquele ano.
+- Recursão — uma função chamando a si mesma para repetir uma ação sem usar
+  `while` (usado no exercício da calculadora).
+
+Exemplo (`aula 3/velocidade.py`):
+
+```python
+def velocidade_media(distancia, tempo):
+    return distancia / tempo
+
+
+distancia = float(input("Digite a distância percorrida (km): "))
+tempo = float(input("Digite o tempo da viagem (horas): "))
+
+print(f"A velocidade média foi de {velocidade_media(distancia, tempo)} km/h")
+```
+
+Exemplo com dicionário (`aula 3/times_camp.py`):
+
+```python
+campeoes = {1958: "Brasil", 1962: "Brasil", 2002: "Brasil", 2022: "Argentina"}
+
+time_consultado = input("Digite o nome do time: ").strip()
+vitorias = sum(1 for time in campeoes.values() if time.lower() == time_consultado.lower())
+
+print(f"O {time_consultado} foi campeão {vitorias} vez(es).")
+```
+
+Arquivos da pasta:
+
+| Arquivo | O que faz |
+|---|---|
+| `bootcamp.py` | Calculadora (+, -, \*, /) que repete o cálculo por recursão, sem usar `while`. |
+| `filmes.py` | Recebe o ano de nascimento e retorna o filme vencedor do Oscar daquele ano (1950–2010). |
+| `media_lista.py` | Calcula a média de uma lista fixa de números. |
+| `paraguai.py` | Lista com os 17 estados (departamentos) do Paraguai. |
+| `pin.py` | Jogo do "pin": conta até um limite substituindo os múltiplos de um número por "pin". |
+| `times_camp.py` | Dicionário com os campeões da Copa do Mundo; conta quantas vezes um time consultado já venceu. |
+| `velocidade.py` | Calcula a velocidade média a partir da distância e do tempo de uma viagem. |
 
 ## Como rodar um exercício
 
