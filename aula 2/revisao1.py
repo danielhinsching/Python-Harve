@@ -7,3 +7,11 @@
 # ou "Fila normal", conforme o caso.
 # ---------------------------------------------
 
+idade = int(input("Digite a idade: "))
+gestante = input("A pessoa está gestante? (sim/não): ")
+deficiencia = input("A pessoa possui alguma deficiência? (sim/não): ")
+
+if idade > 60 or gestante == "sim" or deficiencia == "sim":
+    print("Atendimento prioritário")
+else:
+    print("Fila normal")

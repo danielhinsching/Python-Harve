@@ -8,3 +8,14 @@
 # "Confirmação adicionada". No final, exiba a lista atualizada.
 # ---------------------------------------------
 
+convidados = ["Ana", "Bruno", "Carla", "Diego"]
+nome = input("Digite o nome do convidado: ")
+
+if nome in convidados:
+    print("Já confirmado")
+    convidados.remove(nome)
+else:
+    print("Confirmação adicionada")
+    convidados.append(nome)
+
+print(convidados)
