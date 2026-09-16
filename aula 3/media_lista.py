@@ -1,5 +1,8 @@
 valores = [11, 22, 51, 86, 12, 71, 63]
+soma = 0
 
-media = sum(valores) / len(valores)
-
-print(f"A média dos valores é: {media}")
+for x in valores:
+      soma = soma + x
+      
+      media = soma / len(valores)
+      print(f" nossa média é de {round(media, 1)}")
