@@ -8,6 +8,7 @@ corresponde a um encontro e contém os arquivos `.py` praticados naquele dia.
 - Aula 1 → pasta [`aula 1/`](aula%201/)
 - Aula 2 → pasta [`aula 2/`](aula%202/)
 - Aula 3 → pasta [`aula 3/`](aula%203/)
+- Aula 4 → pasta [`aula 4/`](aula%204/)
 
 A cada nova aula, uma nova pasta `aula N` será adicionada com os arquivos daquele
 conteúdo. Os arquivos dentro de cada pasta são independentes entre si — cada `.py`
@@ -119,6 +120,46 @@ Arquivos da pasta:
 | `times_camp.py` | Dicionário com os campeões da Copa do Mundo; conta quantas vezes um time consultado já venceu. |
 | `velocidade.py` | Calcula a velocidade média a partir da distância e do tempo de uma viagem. |
 
+### Aula 4 — Dicionários, `while` e Módulos
+
+Foco em usar `while` para repetições cuja quantidade não é conhecida de
+antemão (comparando com a recursão vista na aula 3), em consultar
+dicionários e em usar módulos prontos da linguagem, como o `random`.
+
+- `while` — repete um bloco de código enquanto uma condição for verdadeira;
+  útil quando não se sabe de antemão quantas repetições serão necessárias
+  (ex: pedir dados até o usuário parar de digitar).
+- Dicionários como "banco de dados" — consultar um valor a partir de uma
+  chave digitada pelo usuário (ex: população de um país, cartela de bingo).
+- `import random` — módulo para gerar valores aleatórios, como
+  `random.sample()` para sortear números únicos dentro de um intervalo.
+
+Exemplo (`aula 4/pin_while.py`):
+
+```python
+multiplo = int(input("Digite o múltiplo: "))
+limite = int(input("Digite o limite: "))
+
+numero = 1
+while numero <= limite:
+    if numero % multiplo == 0:
+        print("pin")
+    else:
+        print(numero)
+    numero += 1
+```
+
+Arquivos da pasta:
+
+| Arquivo | O que faz |
+|---|---|
+| `paises.py` | Dicionário com os 10 países mais populosos; consulta a população pelo nome digitado. |
+| `caixa_registradora.py` | Registra produto, quantidade e preço até o nome do produto vir em branco; imprime total e quantidade de itens (versão com recursão). |
+| `soma100def.py` | Soma valores digitados pelo usuário até ultrapassar 100, usando recursão (sem `while`). |
+| `soma100while.py` | Mesmo exercício da soma até 100, reescrito com `while`. |
+| `pin_while.py` | Jogo do "pin" (igual ao da aula 3), agora resolvido com `while`. |
+| `bingo.py` | Gera 5 cartelas de bingo (3 números entre 1 e 10 cada); sorteia números até uma cartela esvaziar e anuncia a vencedora. |
+
 ## Como rodar um exercício
 
 1. Abra o terminal na pasta do repositório.
@@ -156,3 +197,109 @@ git push                       # 4. Enviar para o repositório remoto
 ```
 
 **Dica:** rode `git status` sempre que tiver dúvida sobre o que já foi salvo ou não.
+
+### Configuração inicial (`git config`)
+
+Antes do primeiro commit em uma máquina nova, o Git precisa saber quem você é.
+Isso só precisa ser feito uma vez por computador:
+
+```bash
+git config --global user.name "Seu Nome"
+git config --global user.email "seu-email@exemplo.com"
+```
+
+Outras configurações úteis:
+
+| Comando | O que faz |
+|---|---|
+| `git config --list` | Mostra todas as configurações atuais. |
+| `git config --global core.editor "code --wait"` | Define o VS Code como editor padrão do Git (ex: para mensagens de commit). |
+| `git config --global init.defaultBranch main` | Faz novos repositórios começarem na branch `main` (em vez de `master`). |
+| `git config --global core.autocrlf true` | No Windows, evita avisos de quebra de linha (CRLF x LF) entre sistemas diferentes. |
+
+### Conectando o Git ao VS Code
+
+1. Instale o [Git para Windows](https://git-scm.com/downloads) — o instalador já disponibiliza o
+   comando `git` no terminal.
+2. Abra o VS Code e verifique se ele reconhece o Git: `Ctrl+Shift+G` (aba **Source Control**)
+   deve mostrar o status do repositório em vez de "Nenhuma pasta com controle de código-fonte".
+3. O terminal integrado do VS Code (`` Ctrl+` ``) usa o mesmo Git instalado no sistema — os
+   comandos abaixo funcionam tanto por ali quanto pela aba **Source Control** (botões de
+   `+` para `add`, ✓ para `commit`, e o menu `...` para `push`/`pull`).
+4. Extensão recomendada: **GitLens** (mostra autor e histórico de cada linha direto no editor).
+5. Autenticação com o GitHub: ao dar `push` pela primeira vez, o VS Code abre uma janela do
+   navegador pedindo para você fazer login e autorizar — não é preciso digitar senha no terminal.
+
+### Criando um repositório do zero
+
+```bash
+git init                       # transforma a pasta atual em um repositório Git
+git add .
+git commit -m "primeiro commit"
+```
+
+Depois, crie um repositório vazio no site do GitHub (botão **New repository**, sem marcar
+"Add a README") e conecte a pasta local a ele:
+
+```bash
+git remote add origin https://github.com/seu-usuario/seu-repositorio.git
+git branch -M main
+git push -u origin main         # -u salva a ligação, então os próximos "push" bastam sem argumentos
+```
+
+### Clonando um repositório existente
+
+```bash
+git clone https://github.com/usuario/repositorio.git
+```
+
+Isso baixa o repositório completo (com todo o histórico) para uma nova pasta com o mesmo
+nome do repositório.
+
+### Fazendo um fork
+
+Fork é uma cópia de um repositório de outra pessoa para a sua própria conta — usado quando
+você não tem permissão de escrita no original (ex: contribuir com um projeto de terceiros).
+
+1. No GitHub, abra o repositório desejado e clique em **Fork** (canto superior direito).
+2. Clone o **seu fork** (não o original):
+
+   ```bash
+   git clone https://github.com/seu-usuario/repositorio.git
+   ```
+
+3. (Opcional) Conecte o repositório original como `upstream`, para poder trazer atualizações
+   de quem criou o projeto:
+
+   ```bash
+   git remote add upstream https://github.com/usuario-original/repositorio.git
+   git fetch upstream
+   git merge upstream/main
+   ```
+
+### Branches (ramificações)
+
+Usadas para desenvolver algo sem afetar o código principal até que esteja pronto.
+
+| Comando | O que faz |
+|---|---|
+| `git branch` | Lista as branches existentes. |
+| `git branch nome-da-branch` | Cria uma nova branch. |
+| `git checkout nome-da-branch` | Muda para essa branch. |
+| `git checkout -b nome-da-branch` | Cria e já muda para a nova branch (atalho dos dois comandos acima). |
+| `git merge nome-da-branch` | Traz as mudanças de outra branch para a branch atual. |
+
+### Erros comuns e como resolver
+
+| Erro | Causa provável | Solução |
+| --- | --- | --- |
+| `fatal: not a git repository` | O comando foi rodado fora de uma pasta com Git iniciado. | Rode `git init` ou entre (`cd`) na pasta correta do repositório clonado. |
+| `Please tell me who you are` | `user.name`/`user.email` não foram configurados nessa máquina. | Rode os dois comandos de `git config --global` mostrados acima. |
+| `failed to push some refs` / `Updates were rejected` | Existem commits no repositório remoto que você ainda não tem localmente. | Rode `git pull` (ou `git pull --rebase`) antes do `git push`. |
+| Conflito de merge (`CONFLICT (content): Merge conflict in arquivo.py`) | Duas pessoas (ou você e o remoto) mudaram a mesma linha do mesmo arquivo. | Abra o arquivo, escolha o trecho correto entre as marcações `<<<<<<<` / `=======` / `>>>>>>>`, salve, depois `git add arquivo.py` e `git commit`. |
+| `remote origin already exists` | Você tentou `git remote add origin` numa pasta que já tem um remoto configurado. | Use `git remote set-url origin <url>` para trocar a URL, ou `git remote -v` para conferir a atual. |
+| `Support for password authentication was removed` / autenticação falha no `push` | O GitHub não aceita mais senha normal via HTTPS. | Deixe o VS Code autenticar pelo navegador (recomendado) ou gere um **Personal Access Token** em GitHub → Settings → Developer settings, usando-o no lugar da senha. |
+| `Permission denied (publickey)` | Tentativa de usar uma URL `git@github.com:...` (SSH) sem uma chave SSH configurada. | Prefira clonar/usar a URL HTTPS (`https://github.com/...`), mais simples para iniciantes. |
+| Arquivo aparece em "Changes" mesmo sem ter sido editado (warning de LF/CRLF) | Diferença de quebra de linha entre Windows e o repositório. | Rode `git config --global core.autocrlf true` (feito uma vez só). |
+| `detached HEAD state` | Foi feito `checkout` direto em um commit específico, não em uma branch. | Rode `git checkout main` (ou `git switch main`) para voltar à branch principal; crie uma branch antes (`git checkout -b nome`) se quiser guardar o que foi feito nesse estado. |
+| Commit feito sem querer (mensagem errada, arquivo a mais) | — | Se **ainda não** deu `push`: `git commit --amend` corrige a mensagem/arquivos do último commit. Depois do `push`, evite reescrever histórico — prefira um novo commit corrigindo. |
