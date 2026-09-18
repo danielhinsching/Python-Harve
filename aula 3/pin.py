@@ -2,10 +2,10 @@
 
 
 
-def jogo_do_pin(multiplo, limite):
+def jogo_do_pin(x, y):
     contagem = []
-    for numero in range(1, limite + 1):
-        if numero % multiplo == 0:
+    for numero in range(1, y + 1):
+        if numero % x == 0:
             contagem.append("pin")
         else:
             contagem.append(str(numero))
